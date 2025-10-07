@@ -17,6 +17,7 @@ public class PeliculaService {
 
     //Hacemos un Select a la tabla Pelicula
     public List<PeliculaDTO> listarTodos(){
+        System.out.println("Entre al service");
         List<PeliculaEntity> peliculas = repoPelicula.findAll();
 
         List <PeliculaDTO> dtos = peliculas.stream()
@@ -25,30 +26,31 @@ public class PeliculaService {
         return dtos;
     }
 
-    private PeliculaDTO convertirAPeliculaDTO (PeliculaEntity peliculaEntity){
+    private PeliculaDTO convertirAPeliculaDTO (PeliculaEntity entity){
         PeliculaDTO dto = new PeliculaDTO();
-        dto.setId(peliculaEntity.getId());
-        dto.setTitulo(peliculaEntity.getTitulo());
-        dto.setDirector(peliculaEntity.getDirector());
-        dto.setGenero(peliculaEntity.getGenero());
-        dto.setAno_estreno(peliculaEntity.getAno_estreno());
-        dto.setDuracion_min(peliculaEntity.getDuracion_min());
-        dto.setFecha_creacion(peliculaEntity.getFecha_creacion());
+        dto.setId(entity.getId());
+        dto.setTitulo(entity.getTitulo());
+        dto.setDirector(entity.getDirector());
+        dto.setGenero(entity.getGenero());
+        dto.setAno_estreno(entity.getAno_estreno());
+        dto.setDuracion_min(entity.getDuracion_min());
+        dto.setFecha_creacion(entity.getFecha_creacion());
 
         return dto;
     }
 
     public PeliculaDTO crearPelicula (PeliculaDTO peliculaDTO){
+        System.out.println("Entrando al service");
         PeliculaEntity pelicula = new PeliculaEntity();
-        peliculaDTO.setId(null);
-        peliculaDTO.setTitulo(peliculaDTO.getTitulo());
-        peliculaDTO.setDirector(peliculaDTO.getDirector());
-        peliculaDTO.setGenero(peliculaDTO.getGenero());
-        peliculaDTO.setAno_estreno(peliculaDTO.getAno_estreno());
-        peliculaDTO.setDuracion_min(peliculaDTO.getDuracion_min());
-        peliculaDTO.setFecha_creacion(peliculaDTO.getFecha_creacion());
+        pelicula.setTitulo(peliculaDTO.getTitulo());
+        pelicula.setDirector(peliculaDTO.getDirector());
+        pelicula.setGenero(peliculaDTO.getGenero());
+        pelicula.setAno_estreno(peliculaDTO.getAno_estreno());
+        pelicula.setDuracion_min(peliculaDTO.getDuracion_min());
+        pelicula.setFecha_creacion(peliculaDTO.getFecha_creacion());
 
         PeliculaEntity peliculaGuardado = repoPelicula.save(pelicula);
+        System.out.println("Saliendo del service");
         return convertirAPeliculaDTO(peliculaGuardado);
     }
 

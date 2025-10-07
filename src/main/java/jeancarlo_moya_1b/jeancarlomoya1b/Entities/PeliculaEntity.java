@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -14,8 +15,8 @@ import java.util.Date;
 public class PeliculaEntity {
 
     @Id
-    @SequenceGenerator(name = "seq_peliculas", sequenceName = "SEQ_PELICULAS", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_peliculas")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PELICULAS")
+    @SequenceGenerator(name = "SEQ_PELICULAS", sequenceName = "SEQ_PELICULAS", allocationSize = 1)
     @Column(name = "ID_PELICULA")
     private Long id;
 
@@ -29,11 +30,11 @@ public class PeliculaEntity {
     private String genero;
 
     @Column(name = "ANO_ESTRENO")
-    private Number ano_estreno;
+    private int ano_estreno;
 
     @Column(name = "DURACION_MIN")
-    private Number duracion_min;
+    private int duracion_min;
 
     @Column(name = "FECHA_CREACION")
-    private Date fecha_creacion;
+    private LocalDate fecha_creacion;
 }
